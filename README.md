@@ -28,7 +28,7 @@ import fr.shyrogan.konfigurate.serialization.GroupSerializer.deserialize
 ````
 
 You can also modify the ``Gson`` used by modifying the value of the ``GroupSerializer.GSON`` property.  
-**[!]** The ``.excludeFieldsWithoutExposeAnnotation()`` should always be used otherwise GSON might serialize our delegate properties
+**[!]** The ``AntiDelegateExclusionStrategy`` should always be used otherwise GSON might serialize our delegate properties
 
 ### Specifications
 

@@ -5,7 +5,9 @@ import fr.shyrogan.konfigurate.serialization.GroupSerializer.deserialize
 fun main() {
     val serialization = Serialization()
     val text = serialization.serialize()
+    println(text)
     serialization.deserialize(text.replace("false", "true"))
+    println(serialization.subSub)
 }
 
 class Serialization: Group("Serialization") {

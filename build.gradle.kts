@@ -1,6 +1,7 @@
 plugins {
     java
     kotlin("jvm") version "1.4-M2"
+    `maven-publish`
 }
 
 group = "fr.shyrogan"
@@ -14,7 +15,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
-    implementation("com.google.code.gson", "gson", "2.8.0")
+    api("com.google.code.gson", "gson", "2.8.0")
     testCompile("junit", "junit", "4.12")
 }
 
@@ -27,5 +28,13 @@ tasks {
     }
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
+    }
+}
+
+publishing {
+    publications {
+        register("mavenJava", MavenPublication::class) {
+            from(components["java"])
+        }
     }
 }

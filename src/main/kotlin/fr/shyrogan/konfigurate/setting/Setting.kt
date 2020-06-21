@@ -1,6 +1,5 @@
 package fr.shyrogan.konfigurate.setting
 
-import com.google.gson.annotations.Expose
 import fr.shyrogan.konfigurate.Group
 import fr.shyrogan.konfigurate.setting.constraint.Constraint
 import java.util.*
@@ -35,7 +34,6 @@ class Setting<T: Any>(
         @Transient private val constraints: Array<Constraint<T>>
 ): Group(name, subGroups) {
 
-        @Expose
         var value: T = value
                 set(value) {
                         var future = value

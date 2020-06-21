@@ -14,12 +14,12 @@ open class Group(
     /**
      * Returns the name of this [Group].
      */
-    @Expose open val name: String,
+    open val name: String,
 
     /**
      * Returns each sub group for this [Group] instance
      */
-    @Expose open val subGroups: MutableList<Group> = LinkedList()
+    open val subGroups: MutableList<Group> = LinkedList()
 ) {
 
     /**

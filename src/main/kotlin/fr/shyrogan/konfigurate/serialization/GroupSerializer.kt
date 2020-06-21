@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonArray
 import com.google.gson.JsonParser
 import fr.shyrogan.konfigurate.Group
+import fr.shyrogan.konfigurate.serialization.exclusion.AntiDelegateExclusionStrategy
 import fr.shyrogan.konfigurate.setting.Setting
 
 @Suppress("unchecked_cast")
@@ -11,14 +12,14 @@ object GroupSerializer {
 
     var GSON = GsonBuilder()
             .setPrettyPrinting()
-            .excludeFieldsWithoutExposeAnnotation()
+            .setExclusionStrategies(AntiDelegateExclusionStrategy())
             .create()
 
     private const val SUB_GROUPS_NAME = "subGroups"
     private const val VALUE_NAME = "value"
 
     /**
-     * Deserializes [text] by using [reference] as a reference for types.
+     * Deserializes [array] by using [reference] as a reference for types.
      */
     private fun parseSubGroups(array: JsonArray, reference: Group) {
         if(array.size() == 0)
