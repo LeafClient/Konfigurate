@@ -6,10 +6,10 @@
 ### Getting started
 
 Once you added the library into your project, you can define your settings
-by defining a Group implementation
+by defining a Group implementation and implementing its requirements.
 
 ````kotlin
-class Settings: Group()
+class Settings: Group
 ````
 You'll then need to define your settings using the delegation such as
 ````kotlin
