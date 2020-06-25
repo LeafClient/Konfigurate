@@ -10,7 +10,7 @@ import kotlin.reflect.KProperty
  * some extra stuff such as [Constraint]
  */
 class Setting<T: Any>(
-        name: String,
+        override val label: String,
 
         /**
          * Returns the parent group of this [Setting]
@@ -23,16 +23,13 @@ class Setting<T: Any>(
          */
         value: T,
 
-        /**
-         * Returns the sub settings for this [Setting]
-         */
-        subGroups: MutableList<Group> = LinkedList(),
+        override val subGroups: MutableList<Group> = LinkedList(),
 
         /**
          * Returns the constraint for this setting
          */
         @Transient private val constraints: Array<Constraint<T>>
-): Group(name, subGroups) {
+): Group {
 
         var value: T = value
                 set(value) {
@@ -71,7 +68,7 @@ class Setting<T: Any>(
          * Returns a string form of this [Setting]
          */
         override fun toString(): String {
-                return "Setting(name=$name, value=$value)"
+                return "Setting(name=$label, value=$value)"
         }
 
 }
