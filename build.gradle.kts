@@ -9,15 +9,15 @@ version = "1.0.0"
 
 repositories {
     maven("https://dl.bintray.com/kotlin/kotlin-eap")
+    maven("http://jitpack.io")
     mavenCentral()
-    mavenLocal()
 }
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
-    api("com.leafclient", "Trunk", "1.0.0")
-    api("com.google.code.gson", "gson", "2.8.0")
+    implementation("com.github.LeafClient", "Trunk", "1.0.0")
+    implementation("com.google.code.gson", "gson", "2.8.0")
     testCompile("junit", "junit", "4.12")
 }
 
