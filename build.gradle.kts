@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "fr.shyrogan"
-version = "1.0.0"
+version = "1.1.0"
 
 repositories {
     maven("https://dl.bintray.com/kotlin/kotlin-eap")
@@ -16,7 +16,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
-    implementation("com.github.LeafClient", "Trunk", "1.0.0")
+    implementation("com.github.LeafClient", "Trunk", "1.1.0")
     implementation("com.google.code.gson", "gson", "2.8.0")
     testCompile("junit", "junit", "4.12")
 }

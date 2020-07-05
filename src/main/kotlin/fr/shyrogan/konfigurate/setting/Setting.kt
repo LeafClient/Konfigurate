@@ -1,5 +1,6 @@
 package fr.shyrogan.konfigurate.setting
 
+import com.leafclient.trunk.Describable
 import fr.shyrogan.konfigurate.Group
 import fr.shyrogan.konfigurate.setting.constraint.Constraint
 import java.util.*
@@ -10,7 +11,8 @@ import kotlin.reflect.KProperty
  * some extra stuff such as [Constraint]
  */
 class Setting<T: Any>(
-        override val label: String,
+        override val identifier: String,
+        override val description: String,
 
         /**
          * Returns the parent group of this [Setting]
@@ -29,7 +31,7 @@ class Setting<T: Any>(
          * Returns the constraint for this setting
          */
         @Transient private val constraints: Array<Constraint<T>>
-): Group {
+): Describable, Group {
 
         var value: T = value
                 set(value) {
@@ -68,7 +70,7 @@ class Setting<T: Any>(
          * Returns a string form of this [Setting]
          */
         override fun toString(): String {
-                return "Setting(name=$label, value=$value)"
+                return "Setting(name=$identifier, value=$value)"
         }
 
 }

@@ -1,5 +1,9 @@
 package fr.shyrogan.konfigurate.setting
 
+import com.leafclient.trunk.Describable
+import com.leafclient.trunk.Descriptions
+import com.leafclient.trunk.Identifiable
+import com.leafclient.trunk.checkIfIdentifiable
 import fr.shyrogan.konfigurate.Group
 import fr.shyrogan.konfigurate.callback.SettingCallback.Companion.callbacks
 import fr.shyrogan.konfigurate.setting.constraint.Constraint
@@ -8,10 +12,15 @@ import kotlin.reflect.KProperty1
 import kotlin.reflect.jvm.isAccessible
 
 data class SettingBuilder<T: Any>(
-        private var name: String,
-        var parent: Group,
-        var defaultValue: T
-) {
+    override val identifier: String,
+    override val description: String = Descriptions.UNPROVIDED,
+    var parent: Group,
+    var defaultValue: T
+): Identifiable, Describable {
+
+    init {
+        checkIfIdentifiable()
+    }
 
     val constraints = mutableListOf<Constraint<T>>()
 
@@ -40,7 +49,8 @@ data class SettingBuilder<T: Any>(
             }
 
             return Setting(
-                name,
+                identifier,
+                description,
                 parent,
                 defaultValue,
                 LinkedList(),
