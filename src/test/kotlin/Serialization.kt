@@ -10,20 +10,21 @@ fun main() {
     val text = serialization.serialize()
     println(text)
     serialization.deserialize(text.replace("false", "true"))
+    println(serialization.subSub)
 }
 
 class Serialization: Group {
 
-    override val label = "Serialization"
+    override val identifier = "Serialization"
     override val subGroups = mutableListOf<Group>()
 
-    val parent by setting("My setting", true)
+    val parent by setting("my.setting", "desc", true)
 
-    val sub by setting("My sub", Instant.now()) {
+    val sub by setting("my.sub", "desc", Instant.now()) {
         childOf(Serialization::parent)
     }
 
-    val subSub by setting("My sub sub", false) {
+    val subSub by setting("my.sub.sub", "desc", false) {
         childOf(Serialization::sub)
     }
 

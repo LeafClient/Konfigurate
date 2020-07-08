@@ -57,12 +57,12 @@ class Setting<T: Any>(
         /**
          * Returns the value (delegation).
          */
-        operator fun getValue(thisRef: Group, property: KProperty<*>) = value
+        operator fun getValue(thisRef: Any, property: KProperty<*>) = value
 
         /**
          * Defines the value (delegation).
          */
-        operator fun setValue(thisRef: Group, property: KProperty<*>, value: T) {
+        operator fun setValue(thisRef: Any, property: KProperty<*>, value: T) {
                 this.value = value
         }
 

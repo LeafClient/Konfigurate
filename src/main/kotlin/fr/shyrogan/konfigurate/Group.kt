@@ -24,12 +24,13 @@ interface Group: Identifiable {
  * Creates a new [Setting] instance inside of this [Group]
  */
 inline fun <T: Any> Group.setting(
-    identifier: String, description: String, defaultValue: T, crossinline apply: SettingBuilder<T>.() -> Unit = {}
+    identifier: String, description: String, defaultValue: T,
+    crossinline apply: SettingBuilder<T>.() -> Unit = {}
 ): Setting<T> {
     val builder = SettingBuilder(identifier, description, this, defaultValue)
     apply(builder)
-
     val built = builder.build
     built.parent.subGroups += built
+
     return built
 }

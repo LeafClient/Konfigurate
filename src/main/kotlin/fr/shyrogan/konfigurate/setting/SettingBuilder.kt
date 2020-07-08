@@ -49,12 +49,9 @@ data class SettingBuilder<T: Any>(
             }
 
             return Setting(
-                identifier,
-                description,
-                parent,
-                defaultValue,
-                LinkedList(),
-                constraints.toTypedArray()
+                    identifier, description, parent,
+                    defaultValue, LinkedList(),
+                    constraints.toTypedArray()
             )
         }
 

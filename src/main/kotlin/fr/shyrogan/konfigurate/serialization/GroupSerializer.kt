@@ -6,6 +6,7 @@ import com.google.gson.JsonParser
 import fr.shyrogan.konfigurate.Group
 import fr.shyrogan.konfigurate.serialization.exclusion.AntiDelegateExclusionStrategy
 import fr.shyrogan.konfigurate.setting.Setting
+import java.io.StringReader
 
 @Suppress("unchecked_cast")
 object GroupSerializer {
@@ -27,7 +28,7 @@ object GroupSerializer {
 
         array.forEach {
             val jObject = it.asJsonObject
-            val group = reference.getGroup(jObject["name"].asString) ?: return@forEach
+            val group = reference.getGroup(jObject["identifier"].asString) ?: return@forEach
 
             if(group is Setting<*> && jObject.has(VALUE_NAME)) {
                 (group as Setting<Any>).value = GSON.fromJson(jObject.get(VALUE_NAME), group.value::class.java)
@@ -42,14 +43,14 @@ object GroupSerializer {
     /**
      * Serializes this group into a writable text
      */
-    fun Group.serialize(): String = GSON.toJson(this)
+    fun Group.serialize(): String = GSON.toJson(this.subGroups)
 
     /**
      * Applies the values contained inside of [text] (got using [serialize] method).
      */
     fun Group.deserialize(text: String) {
-        val jObject = JsonParser().parse(text).asJsonObject
-        parseSubGroups(jObject.get(SUB_GROUPS_NAME).asJsonArray, this)
+        val jObject = JsonParser().parse(StringReader(text)).asJsonArray
+        parseSubGroups(jObject, this)
     }
 
 }
