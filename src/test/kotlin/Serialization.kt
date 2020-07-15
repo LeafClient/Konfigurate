@@ -4,6 +4,7 @@ import fr.shyrogan.konfigurate.serialization.GroupSerializer.deserialize
 import fr.shyrogan.konfigurate.setting
 import java.time.Instant
 import java.time.temporal.ChronoUnit
+import java.util.*
 
 fun main() {
     val serialization = Serialization()
@@ -16,7 +17,7 @@ fun main() {
 class Serialization: Group {
 
     override val identifier = "Serialization"
-    override val subGroups = mutableListOf<Group>()
+    override val subGroups: MutableList<Group> = LinkedList()
 
     val parent by setting("my.setting", "desc", true)
 

@@ -1,6 +1,6 @@
 package fr.shyrogan.konfigurate.setting.constraint.impl
 
-import fr.shyrogan.konfigurate.setting.SettingBuilder
+import fr.shyrogan.konfigurate.setting.Setting
 import fr.shyrogan.konfigurate.setting.constraint.Constraint
 
 /**
@@ -30,10 +30,10 @@ class RestrictionConstraint<T: Any>(val choices: Array<out T>): Constraint<T> {
 /**
  * Creates and adds a new [RestrictionConstraint]
  */
-inline fun <reified T: Any> SettingBuilder<T>.restrict(vararg choices: T) {
-    constraints += if(!choices.contains(defaultValue)) {
-        RestrictionConstraint(arrayOf(defaultValue, *choices))
+inline fun <reified T: Any> Setting<T>.restrict(vararg choices: T) {
+    addConstraint(if(!choices.contains(value)) {
+        RestrictionConstraint(arrayOf(value, *choices))
     } else {
         RestrictionConstraint(choices)
-    }
+    })
 }

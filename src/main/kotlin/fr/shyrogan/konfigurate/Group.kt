@@ -2,7 +2,6 @@ package fr.shyrogan.konfigurate
 
 import com.leafclient.trunk.Identifiable
 import fr.shyrogan.konfigurate.setting.Setting
-import fr.shyrogan.konfigurate.setting.SettingBuilder
 
 /**
  * Represents a [Group] of settings to the library and provide
@@ -13,10 +12,9 @@ interface Group: Identifiable {
     val subGroups: MutableList<Group>
 
     /**
-     * Returns the group contained by this group with the name [name]
+     * Returns the group contained by this group with [identifier]
      */
-    fun getGroup(name: String)
-        = subGroups.firstOrNull { it.identifier.equals(name, true) }
+    fun getGroup(identifier: String) = subGroups.firstOrNull { it.identifier.equals(identifier, true) }
 
 }
 
@@ -25,12 +23,10 @@ interface Group: Identifiable {
  */
 inline fun <T: Any> Group.setting(
     identifier: String, description: String, defaultValue: T,
-    crossinline apply: SettingBuilder<T>.() -> Unit = {}
+    crossinline apply: Setting<T>.() -> Unit = {}
 ): Setting<T> {
-    val builder = SettingBuilder(identifier, description, this, defaultValue)
-    apply(builder)
-    val built = builder.build
-    built.parent.subGroups += built
-
-    return built
+    val setting = Setting(identifier, description, this, defaultValue)
+    apply(setting)
+    subGroups += setting
+    return setting
 }
