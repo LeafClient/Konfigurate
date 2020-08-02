@@ -1,11 +1,11 @@
 plugins {
     java
-    kotlin("jvm") version "1.4-M2"
+    kotlin("jvm") version "1.4.0-rc"
     `maven-publish`
 }
 
 group = "fr.shyrogan"
-version = "1.1.2"
+version = "1.1.3"
 
 repositories {
     maven("https://dl.bintray.com/kotlin/kotlin-eap")
