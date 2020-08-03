@@ -2,6 +2,7 @@ package fr.shyrogan.konfigurate.setting
 
 import com.leafclient.trunk.Describable
 import fr.shyrogan.konfigurate.Group
+import fr.shyrogan.konfigurate.callback.SettingCallback
 import fr.shyrogan.konfigurate.setting.constraint.Constraint
 import java.util.*
 import kotlin.reflect.KProperty
@@ -98,6 +99,11 @@ class Setting<T: Any>(
          */
         override fun toString(): String {
                 return "Setting(name=$identifier, value=$value)"
+        }
+
+        init {
+            SettingCallback.callbacks
+                    .forEach { it.onCreate(this) }
         }
 
 }
