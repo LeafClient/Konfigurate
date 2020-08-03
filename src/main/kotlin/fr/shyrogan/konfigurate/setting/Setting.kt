@@ -32,7 +32,7 @@ class Setting<T: Any>(
         /**
          * Returns the constraint for this setting
          */
-        @Transient private var constraints: MutableMap<Class<out Constraint<T>>, Constraint<T>> = linkedMapOf()
+        @Transient var constraints: MutableMap<Class<out Constraint<T>>, Constraint<T>> = linkedMapOf()
 ): Describable, Group {
 
         var value: T = value
@@ -47,7 +47,8 @@ class Setting<T: Any>(
         /**
          * Returns the [Constraint] instance (if it exists) contained by this [Setting]
          */
-        fun <C : Constraint<T>> getConstraint(clazz: Class<C>) = constraints[clazz]
+        @Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
+        inline fun <C : Constraint<T>> getConstraint(clazz: Class<C>) = constraints[clazz] as C
 
         /**
          * Returns the [Constraint] instance (if it exists) contained by this [Setting]
@@ -57,7 +58,8 @@ class Setting<T: Any>(
         /**
          * Adds specified [constraint] to the constrains of this [Setting]
          */
-        fun addConstraint(constraint: Constraint<T>) = constraints.put(constraint::class.java, constraint)
+        @Suppress("NOTHING_TO_INLINE")
+        inline fun addConstraint(constraint: Constraint<T>) = constraints.put(constraint::class.java, constraint)
 
         /**
          * Defines the delegate of specified [property] as the parent if it's a group.
