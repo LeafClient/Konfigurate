@@ -29,4 +29,9 @@ class Serialization: Group {
         childOf(Serialization::sub)
     }
 
+    val group = object: Group {
+        override val identifier = "group"
+        override val subGroups = LinkedList<Group>()
+    }
+
 }

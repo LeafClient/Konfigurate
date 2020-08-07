@@ -26,7 +26,7 @@ inline fun <T: Any> Group.setting(
     crossinline apply: Setting<T>.() -> Unit = {}
 ): Setting<T> {
     val setting = Setting(identifier, description, this, defaultValue)
-    apply(setting)
     subGroups += setting
+    apply(setting)
     return setting
 }

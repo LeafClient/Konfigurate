@@ -77,9 +77,9 @@ class Setting<T: Any>(
          * Modifies the parent of this setting to [group]
          */
         fun childOf(group: Group) {
-                parent.subGroups -= this
+                parent.subGroups.remove(this)
                 parent = group
-                parent.subGroups += this
+                parent.subGroups.add(this)
         }
 
         /**
@@ -101,9 +101,28 @@ class Setting<T: Any>(
                 return "Setting(name=$identifier, value=$value)"
         }
 
+        override fun equals(other: Any?): Boolean {
+                if (this === other) return true
+                if (javaClass != other?.javaClass) return false
+
+                other as Setting<*>
+
+                if (identifier.equals(other.identifier, true)) return false
+                if (value != other.value) return false
+
+                return true
+        }
+
+        override fun hashCode(): Int {
+                var result = identifier.hashCode()
+                result = 31 * result + value.hashCode()
+                return result
+        }
+
+
         init {
-            SettingCallback.callbacks
-                    .forEach { it.onCreate(this) }
+                SettingCallback.callbacks
+                        .forEach { it.onCreate(this) }
         }
 
 }
