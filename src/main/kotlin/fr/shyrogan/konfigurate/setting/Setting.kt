@@ -49,7 +49,7 @@ class Setting<T: Any>(
          * Returns the [Constraint] instance (if it exists) contained by this [Setting]
          */
         @Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
-        inline fun <C : Constraint<T>> getConstraint(clazz: Class<C>) = constraints[clazz] as C
+        inline fun <C : Constraint<T>> getConstraint(clazz: Class<C>) = constraints[clazz] as C?
 
         /**
          * Returns the [Constraint] instance (if it exists) contained by this [Setting]
