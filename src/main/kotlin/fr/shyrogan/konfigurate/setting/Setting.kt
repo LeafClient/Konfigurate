@@ -42,7 +42,7 @@ class Setting<T: Any>(
                         constraints.forEach { (_, it) ->
                                 future = it(this.value, future)
                         }
-                        field = value
+                        field = future
                 }
 
         /**
